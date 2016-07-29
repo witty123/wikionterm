@@ -14,7 +14,7 @@ def search(search_term,log):
     if search_term == None:
         click.echo("Enter the search term")
         search_term = raw_input()
-    jsonres =  urllib2.urlopen("https://en.wikipedia.org/w/api.php?action=opensearch&search="+ search_term +"&limit=1&namespace=0&format=json").read()
+    jsonres =  urllib2.urlopen("https://en.wikipedia.org/w/api.php?action=opensearch&search="+ urllib.quote(search_term) +"&limit=1&namespace=0&format=json").read()
     jsonres = str(jsonres)
     # click.echo(jsonres)
     jsonres = jsonres.split(",")
@@ -24,7 +24,7 @@ def search(search_term,log):
     url = url.replace("\"","")
     url = str(url)
     if url != "":
-        click.echo(url+'\n')
+        click.echo(url)
         log.write(url+'\n')
     else:
         click.echo("No wiki link found!")
